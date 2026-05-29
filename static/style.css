@@ -1,0 +1,107 @@
+/*  General CSS/Theme Guidelines */ 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d0d0f; color: #e8e8e8; font-family: Inter, sans-serif; min-height: 100vh; display: flex; flex-direction: column;}
+
+/*  CSS for Bar at the Top of Every Screen */ 
+.navbar { background: linear-gradient(to top, #111114, #666); border-bottom: 0.5px solid #2a2a2f; padding: 1rem 2rem; 
+    display: flex; justify-content: center; align-items: center; }
+.nav-title { text-align: center; font-size: 18px; font-weight: 700; color: #ffffff; margin-right: 20px;}
+.nav-season { font-family: Helvetica, sans-serif; font-size: 14px; color: #888888; }
+
+/*   CSS For Page Header */ 
+.page-header { padding: 4rem 2rem 2rem; border-bottom: 0.5px solid #2a2a2f; margin-bottom: 2rem; display: flex; flex-direction: column; gap:5px; 
+    justify-content: center; align-items: center;}
+.page-header h1 { font-size: 40px; font-weight: 600; color: #f5ae82;}
+.page-header p { font-size: 15px; color: #666; margin-top: 4px; }
+
+/*  CSS For Buttons that Navigate to Different Pages */ 
+.nav-buttons { display: flex; gap: 1rem; padding: 0rem 2rem;}
+.nav-btn { flex: 1; background: #1a1a1f; border: 0.5px solid #2a2a2f; border-radius: 10px; color: #cccccc; font-size: 15px; font-weight: 500; padding: 1rem; 
+    text-align: center; text-decoration: none; display: block; transition: all 0.2s; }
+.nav-btn:hover { border-color: #378ADD; color: #ffffff; }
+.get-started{background: #E87722; border: 0.5px solid #2a2a2f; border-radius: 10px; color: #000000; font-family: monospace; 
+    font-size: 15px; font-style: bold; font-weight: 500; padding: 1rem; text-align: center; text-decoration: none; display: block; transition: all 0.2s; }
+
+/* CSS For Main Content and Charts on League Overview Page  */ 
+.main-content { padding: 0 2rem 4rem;}
+.chart-container { margin-bottom: 2rem; margin-top: 1rem;}
+
+/*  Two Column General CSS for League Overview */ 
+.two-col { display: flex; gap: 2rem; }
+.col { flex: 1; }
+.centered { text-align: center; }
+
+/*   CSS for Tables on League Overview Page*/ 
+table { width: 100%; border-collapse: collapse; background: #111114; border-radius: 12px; overflow: hidden; }
+th { color: #555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 10px 16px; border-bottom: 0.5px solid #2a2a2f; text-align: left; }
+td { padding: 10px 16px; border-bottom: 0.5px solid #2a2a2f; color: #e8e8e8; font-size: 14px; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #1a1a1f; }
+
+
+.section-label { font-size: 16px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 0.75rem; text-align: center;}
+.pos-badge { font-size: 11px; background: #1a1a1f; border: 0.5px solid #2a2a2f; border-radius: 4px; padding: 2px 6px; color: #888; }
+
+/*   CSS for Stats on Player and Compare pages */ 
+
+.stat-cards-row { display: flex; gap: 1rem; margin-bottom: 1rem; }
+.stat-card { flex: 1; background: #1a1a1f; border: 0.5px solid #2a2a2f; border-radius: 10px; padding: 1.25rem 1rem; text-align: center; }
+.stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 0.5rem; }
+.stat-value { font-size: 28px; font-weight: 700; color: #f5ae82; }
+.stat-value2 { font-size: 28px; font-weight: 700; color: #888; }
+.stat-value3{font-size: 28px; font-weight: 700; color: #378ADD }
+
+.player-card { display: flex; gap: 3rem; align-items: flex-start; margin-top: 2rem; }
+.player-photo img { width: 510px; border-radius: 12px; margin-top: -2rem;}
+.no-photo { width: 300px; height: 380px; background: #1a1a1f; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #444; }
+.player-stats { flex: 1;}
+.player-stats h2 { font-size: 24px; font-weight: 600; color: #ffffff; margin-bottom: 0.25rem; margin-top: -2rem;}
+.player-subtitle { font-size: 13px; color: #555; margin-bottom: 1.5rem; }
+.player-select { background: #1a1a1f; border: 0.5px solid #2a2a2f; border-radius: 8px; color: #e8e8e8; padding: 0.75rem 1rem; width: 100%; 
+    font-size: 14px; margin-bottom: 2rem; margin-top: 2rem;}
+
+/*   CSS to Determine Colors for boxes on Compare Page */ 
+
+.compare-table td { text-align: center; font-size: 14px; }
+.winner { font-weight: 700; color: #ffffff; background: #1e2a1e; }
+.loser { color: #888888; }
+.tie { font-weight: 700; color: #ffffff; background: #2a2a1e; }
+.stat-mid { color: #555555; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/*   CSS for Footer on All Pages*/ 
+footer {
+    border-top: 0.5px solid #2a2a2f;
+    color: #555;
+    text-align: center;
+    font-size: 12px;
+    padding: 1.5rem 2rem;
+    margin-top: auto;
+    background: #0d0d0f;
+}
+/*   CSS for Table and Player Photos on Compare Page */ 
+.compare-table {
+    max-width: 1300px;
+    width: auto;
+    min-width: 950px;
+    margin: 0 auto;
+}
+.compare-table th:nth-child(1),
+.compare-table td:nth-child(1) { width: 35%; }
+
+.compare-table th:nth-child(2),
+.compare-table td:nth-child(2) { width: 30%; }
+
+.compare-table th:nth-child(3),
+.compare-table td:nth-child(3) { width: 35%; }
+
+.compare-photos {
+    display: flex;
+    justify-content: space-evenly;
+    max-width: 1250px;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+}
+
+/*   General CSS for Image and Selecting Items */ 
+img { max-width: 100%; border-radius: 12px; }
+select { cursor: pointer; }

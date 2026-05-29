@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--  Create Chart -->
+<div class="chart-container">
+    <canvas id="positionChart" height="80"></canvas>
+</div>
+
+<!--  Use Chart.js code -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+<!--  Create the Bar chart with the position, use specific filters to adjust and make more visually appealing. Using Jinja2 template/code -->
+<script>
+    const ctx = document.getElementById('positionChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [{% for row in position_avg %}'{{ row.Pos }}'{% if not loop.last %},{% endif %}{% endfor %}],
+            datasets: [{
+                data: [{% for row in position_avg %}{{ row.ValuePerMillion | round(4) }}{% if not loop.last %},{% endif %}{% endfor %}],
+                backgroundColor: ['#378ADD', '#1D9E75', '#D85A30', '#7F77DD', '#BA7517'],
+                borderRadius: 6,
+                borderWidth: 0
+            }]
+        },
+        options: {
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: 'Average Value Per Million by Position', color: '#ffffff', font: { size: 20 } }
+            },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#aaaaaa' } },
+                y: { grid: { color: '#222222' }, ticks: { color: '#aaaaaa' } }
+            }
+        }
+    });
+</script>
+
+<!--  Create the two-column/two tables -->
+<div class="two-col" style="margin-top:2rem;">
+    <div class="col">
+        <!--  Create top10 table -->
+        <p class="section-label">Top 10 Value Players</p>
+        <table>
+            <thead>
+                <tr>
+                    <!--  Include the Following Statistics about the player -->
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Pos</th>
+                    <th>Salary</th>
+                    <th>Score</th>
+                    <th>Value/M</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--  Jinja2 for loop, loop and update statistics based on top 10-->
+                {% for i, player in top10 %}
+                <tr>
+                    <!--  Use different colors for 1,2,3. -->
+                    <td style="color:{% if i == 1 %}#FFD700{% elif i == 2 %}#C0C0C0{% elif i == 3 %}#CD7F32{% else %}#555{% endif %}; font-weight:{% if i <= 3 %}700{% else %}400{% endif %};">{{ i }}</td>
+                    <td><a href="/player?name={{ player.Player }}" style="color:#ffffff; text-decoration:none;">{{ player.Player }}</a></td>
+                    <td><span class="pos-badge">{{ player.Pos }}</span></td>
+                    <td>${{ "{:,.0f}".format(player.Salary) }}</td>
+                    <td>{{ "%.3f"|format(player.Score) }}</td>
+                    <td style="color:#22c55e; font-weight:600;">{{ "%.3f"|format(player.ValuePerMillion) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--  Same as above, just now with the bottom 10 players -->
+    <div class="col">
+        <p class="section-label">Bottom 10 Value Players</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player</th>
+                    <th>Pos</th>
+                    <th>Salary</th>
+                    <th>Score</th>
+                    <th>Value/M</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i, player in bottom10 %}
+                <tr>
+                    <td style="color:{% if i == 1 %}#FFD700{% elif i == 2 %}#C0C0C0{% elif i == 3 %}#CD7F32{% else %}#555{% endif %}; font-weight:{% if i <= 3 %}700{% else %}400{% endif %};">{{ i }}</td>
+                    <td><a href="/player?name={{ player.Player }}" style="color:#ffffff; text-decoration:none;">{{ player.Player }}</a></td>
+                    <td><span class="pos-badge">{{ player.Pos }}</span></td>
+                    <td>${{ "{:,.0f}".format(player.Salary) }}</td>
+                    <td>{{ "%.3f"|format(player.Score) }}</td>
+                    <td style="color:#ef4444; font-weight:600;">{{ "%.3f"|format(player.ValuePerMillion) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

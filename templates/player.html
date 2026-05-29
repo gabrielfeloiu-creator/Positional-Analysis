@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!--  Create button to allow user to select a player to view stats for-->
+<form method="GET" action="/player">
+    <select name="name" onchange="this.form.submit()" class="player-select">
+        <option value="">Search for a player...</option>
+        {% for p in players_list %}
+        <option value="{{ p }}" {% if p == selected %}selected{% endif %}>{{ p }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+<!--  Source URL, Update player photo -->
+{% if selected %}
+<div class="player-card">
+    <div class="player-photo">
+        {% if url %}
+            <img src="{{ url }}" alt="{{ selected }}">
+        {% else %}
+            <div class="no-photo">No Photo</div>
+        {% endif %}
+    </div>
+    <!--  Update player stats for each row and label/value, basic repetition-->
+    <div class="player-stats">
+        <h2>{{ selected }}</h2>
+        <p class="player-subtitle">{{ row.Pos }} · {{ row.Team }} · ${{ "{:,.0f}".format(row.Salary) }}</p>
+
+        <div class="stat-cards-row">
+            <div class="stat-card">
+                <p class="stat-label">PPG</p>
+                <p class="stat-value">{{ "%.1f"|format(row.PTS) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">AST</p>
+                <p class="stat-value">{{ "%.1f"|format(row.AST) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">RPG</p>
+                <p class="stat-value">{{ "%.1f"|format(row.TRB) }}</p>
+            </div>
+        </div>
+        <!--  Row 2 -->
+        <div class="stat-cards-row">
+            <div class="stat-card">
+                <p class="stat-label">Score</p>
+                <p class="stat-value3">{{ "%.3f"|format(row.Score) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Salary</p>
+                <p class="stat-value2">${{ "{:,.0f}".format(row.Salary) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">Value/M</p>
+                <p class="stat-value">{{ "%.3f"|format(row.ValuePerMillion) }}</p>
+            </div>
+        </div>
+        <!--  Row 3 -->
+        <div class="stat-cards-row">
+            <div class="stat-card">
+                <p class="stat-label">SPG</p>
+                <p class="stat-value2">{{ "%.1f"|format(row.STL) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">BPG</p>
+                <p class="stat-value2">{{ "%.1f"|format(row.BLK) }}</p>
+            </div>
+            <div class="stat-card">
+                <p class="stat-label">TS%</p>
+                <p class="stat-value2">{{ "%.3f"|format(row['TS%']) }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

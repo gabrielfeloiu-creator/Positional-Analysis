@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--  USE Style.css for visuals -->
+    <link rel="stylesheet" href = "{{url_for('static', filename='style.css')}}">
+    <title> NBA Value Per Million </title>
+    
+</head>
+<body>
+    <!--  Create Navbar -->
+    <div class = "navbar">  
+        <span class = "nav-title">🏀 NBA Value Per Million: </span>
+        <span class = "nav-season"> 2025-26 Season</span>
+    </div>
+    <!--  Create header -->
+    <div class = "page-header">
+        <h1>NBA Value Per Million</h1>
+        <p> Composite score per salary dollar · 2025-26 season · Position-normalized </p>
+    </div>
+    <!--  Create nav buttons that lead to the flask program, render new html pages -->
+    <div class = "nav-buttons">
+        <a href="/overview" class="nav-btn">🏆 League Overview</a>
+        <a href="/player" class="nav-btn">🔍 Player Lookup</a>
+        <a href="/compare" class="nav-btn">⚖️ Compare Players</a>
+    </div>
+    <!--  Use jinja2 templates for the maincontent-->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    <!--  Footer with credit to Basketball Reference -->
+    <footer> 
+        <p> Data Credit: Basketball Reference; Image Credit: NBA.com; Gabriel Feloiu</p>
+    </footer>
+</body>
+</html>

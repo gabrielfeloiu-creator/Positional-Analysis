@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Create the Buttons to Select Players to Compare -->
+<form method="GET" action="/compare">
+    <div class="two-col" style="margin-bottom:2rem;">
+        <div class="col">
+            <select name="p1" onchange="this.form.submit()" class="player-select">
+                <option value="">Player 1...</option>
+                {% for p in players_list %}
+                <option value="{{ p }}" {% if p == p1 %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col">
+            <select name="p2" onchange="this.form.submit()" class="player-select">
+                <option value="">Player 2...</option>
+                {% for p in players_list %}
+                <option value="{{ p }}" {% if p == p2 %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</form>
+
+<!--  In the case that both photos work, here we actually load in the photos and space them evenly using CSS -->
+{% if p1 and p2 %}
+
+<div class="compare-photos" style="margin-bottom:2rem;">
+    <div class="col centered">
+        {% if url1 %}<img src="{{ url1 }}" alt="{{ p1 }}" style="width:280px;">{% endif %}
+        <p style="color:#aaaaaa; font-size:15px; font-weight:600; margin-top:0.75rem;">{{ p1 }}</p>
+    </div>
+    <div class="col centered">
+        {% if url2 %}<img src="{{ url2 }}" alt="{{ p2 }}" style="width:280px;">{% endif %}
+        <p style="color:#aaaaaa; font-size:15px; font-weight:600; margin-top:0.75rem;">{{ p2 }}</p>
+    </div>
+</div>
+
+<!--  Aligning text in the comparison table, checking what to highlight and when -->
+<table class="compare-table">
+    <thead>
+        <tr>
+            <th style="text-align:center; color:#378ADD;">{{ p1 }}</th>
+            <th style="text-align:center;">Stat</th>
+            <th style="text-align:center; color:#378ADD;">{{ p2 }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for stat in stats %}
+        <tr>
+            <td class="{% if stat.tie %}tie{% elif stat.p1_wins %}winner{% else %}loser{% endif %}">{{ stat.v1 }}</td>
+            <td class="stat-mid">{{ stat.label }}</td>
+            <td class="{% if stat.tie %}tie{% elif stat.p2_wins %}winner{% else %}loser{% endif %}">{{ stat.v2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+
+{% endblock %}
