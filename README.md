@@ -2,7 +2,7 @@
 
 A web application that ranks every NBA player by composite performance score per salary dollar — built to answer the question: **who actually gives you the most bang for their contract?**
 
-Live demo: `[your-render-url].onrender.com`
+Live demo: `https://nbapositionalanalysis.onrender.com`
 
 ---
 
